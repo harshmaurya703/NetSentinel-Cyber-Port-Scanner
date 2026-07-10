@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>NetSentinel - Scan History</title>
+
+<style>
+
+body{
+background:#071018;
+color:#eafcff;
+font-family:Arial, sans-serif;
+padding:30px;
+}
+
+h1{
+text-align:center;
+color:#2dfca8;
+}
+
+.card{
+
+background:#101b27;
+border:1px solid #244357;
+border-radius:15px;
+padding:20px;
+margin-top:30px;
+
+box-shadow:0 0 20px rgba(45,252,168,.15);
+
+}
+
+.history-item{
+
+background:#071018;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
+border-left:4px solid #2dfca8;
+
+}
+
+a{
+
+color:#2dfca8;
+text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>📜 NetSentinel Scan History</h1>
+
+
+<div class="card">
+
+
+{% if history %}
+
+{% for item in history %}
+
+<div class="history-item">
+
+{{ item }}
+
+</div>
+
+{% endfor %}
+
+
+{% else %}
+
+<p>No Scan History Available</p>
+
+
+{% endif %}
+
+
+<br>
+
+<a href="/">⬅ Back to Scanner</a>
+
+
+</div>
+
+
+</body>
+
+</html>

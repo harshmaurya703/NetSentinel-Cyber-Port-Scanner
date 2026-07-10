@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+
+scan_report.txt
+scan_report.csv
+scan_report.pdf
+
+history/scan_history.txt
