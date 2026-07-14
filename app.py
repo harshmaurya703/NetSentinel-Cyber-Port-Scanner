@@ -65,6 +65,9 @@ def home():
     results = []
     scan_time = None
     error = None
+    open_ports = 0
+    total_ports = 0
+    target = ""
 
     if request.method == "POST":
 
@@ -124,15 +127,16 @@ def home():
         
         open_ports = len(results)
         total_ports = (end_port - start_port) + 1
-
         for result in results:
 
-         result["service"] = detect_service(target, result["port"])
+            result["service"] = detect_service(target, result["port"])
 
-    if result["status"].lower() == "open":
-        result["banner"] = grab_banner(target, result["port"])
-    else:
-        result["banner"] = "-"
+            if result["status"].lower() == "open":
+                result["banner"] = grab_banner(target, result["port"])
+            else:
+                result["banner"] = "-"
+
+        
 
         end_time = time.time()
         scan_time = round(end_time - start_time, 2)
@@ -203,8 +207,7 @@ def download_report():
     return send_file("scan_report.txt", as_attachment=True)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
 @app.route("/download_csv")
 def download_csv():
     return send_file("scan_report.csv", as_attachment=True)
@@ -231,3 +234,5 @@ def history():
         "history.html",
         history=data
     )
+if __name__ == "__main__":
+    app.run(debug=True)
