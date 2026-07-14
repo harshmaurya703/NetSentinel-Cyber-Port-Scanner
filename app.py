@@ -7,6 +7,7 @@ import csv
 import time
 import socket
 import ipaddress
+import os
 from datetime import datetime
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
@@ -181,7 +182,9 @@ def home():
                         result.get("service", "Unknown"),
                         result.get("banner", "-")
                     ]
-                )        
+                )
+
+                os.makedirs("history", exist_ok=True)     
         with open("history/scan_history.txt", "a") as history:
 
             history.write(
@@ -222,6 +225,8 @@ def download_pdf():
     )
 @app.route("/history")
 def history():
+    os.makedirs("history", exist_ok=True)
+    history_file = os.path.join("history", "scan_history.txt")
 
     try:
         with open("history/scan_history.txt", "r") as file:
@@ -235,4 +240,8 @@ def history():
         history=data
     )
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=True
+    )
