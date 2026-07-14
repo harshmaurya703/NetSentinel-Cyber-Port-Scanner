@@ -183,30 +183,30 @@ def home():
                         result.get("banner", "-")
                     ]
                 )
-                os.makedirs("history", exist_ok=True)
+        os.makedirs("history", exist_ok=True)
 
-                history_file = os.path.join("history", "scan_history.txt")
+        history_file = os.path.join("history", "scan_history.txt")
 
-                with open(history_file, "a") as history:
+        with open(history_file, "a") as history:
 
-                     history.write(
-                      f"{datetime.now().strftime('%d-%m-%Y %H:%M:%S')} | "
-                      f"{target} | "
-                      f"Ports: {start_port}-{end_port} | "
-                    f"Open: {open_ports}\n"
-    )
+            history.write(
+                f"{datetime.now().strftime('%d-%m-%Y %H:%M:%S')} | "
+                f"{target} | "
+                f"Ports: {start_port}-{end_port} | "
+                f"Open: {open_ports}\n"
+            )
 
-          
 
     return render_template(
-    "index.html",
-    results=results,
-    scan_time=scan_time,
-    error=error,
-    open_ports=open_ports,
-    total_ports=total_ports,
-    target=target
-)
+        "index.html",
+        results=results,
+        scan_time=scan_time,
+        error=error,
+        open_ports=open_ports,
+        total_ports=total_ports,
+        target=target
+    )
+   
 
 
 @app.route("/download")
