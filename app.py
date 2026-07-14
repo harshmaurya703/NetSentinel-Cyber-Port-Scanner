@@ -183,16 +183,20 @@ def home():
                         result.get("banner", "-")
                     ]
                 )
+                os.makedirs("history", exist_ok=True)
 
-                os.makedirs("history", exist_ok=True)     
-        with open("history/scan_history.txt", "a") as history:
+history_file = os.path.join("history", "scan_history.txt")
 
-            history.write(
-                f"{datetime.now().strftime('%d-%m-%Y %H:%M:%S')} | "
-                f"{target} | "
-                f"Ports: {start_port}-{end_port} | "
-                f"Open: {open_ports}\n"
-            )   
+with open(history_file, "a") as history:
+
+    history.write(
+        f"{datetime.now().strftime('%d-%m-%Y %H:%M:%S')} | "
+        f"{target} | "
+        f"Ports: {start_port}-{end_port} | "
+        f"Open: {open_ports}\n"
+    )
+
+          
 
     return render_template(
     "index.html",
